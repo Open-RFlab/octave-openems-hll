@@ -126,13 +126,13 @@ endif
 ## 'bootstrap'. Administrators, checking build reproducibility, can
 ## put in the missing 'bootstrap' file if they feel they know its
 ## necessary contents.
-ifneq (,$(wildcard src/bootstrap))
-	cd "$@/src" && ./bootstrap && $(RM) -r "autom4te.cache"
-endif
+#ifneq (,$(wildcard src/bootstrap))
+#	cd "$@/src" && ./bootstrap && $(RM) -r "autom4te.cache"
+#endif
 ## Uncomment this if your src/Makefile.in has these targets for
 ## pre-building something for the release (e.g. documentation).
-	cd "$@/src" && ./configure && $(MAKE) prebuild && \
-	  $(MAKE) distclean && $(RM) Makefile
+#	cd "$@/src" && ./configure && $(MAKE) prebuild && \
+#	  $(MAKE) distclean && $(RM) Makefile
 ##
 	${FIX_PERMISSIONS} "$@"
 
