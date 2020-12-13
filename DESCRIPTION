@@ -1,0 +1,13 @@
+Name: openems-hll
+Version: 0.0.1
+Date: 2020-13-12
+Author: Thomas Lepoix <thomas.lepoix@protonmail.ch>
+Maintainer: Thomas Lepoix <thomas.lepoix@protonmail.ch>
+Title: openEMS High-level layer
+Description: The Open-RFlab openems-hll package provides functions for
+ easing the use of the openEMS FDTD simulator.
+#Depends: octave, openems
+Depends: octave
+SystemRequirements: octave-openems [openSUSE] octave-openEMS, imagemagick [Fedora] ImageMagick [openSUSE] ImageMagick
+License: GPLv3+
+Url: http://github.com/thomaslepoix/Qucs-RFlayout
