@@ -119,7 +119,7 @@ ifeq (${vcs},hg)
 endif
 ifeq (${vcs},git)
 	git archive --format=tar --prefix="$@/" HEAD | $(TAR) -x
-	$(RM) "$@/.gitignore"
+	$(RM) -r "$@/.gitignore" "$@/README.md" "$@/res" "$@/Makefile"
 endif
 ## Don't fall back to run the supposed necessary contents of
 ## 'bootstrap' here. Users are better off if they provide
