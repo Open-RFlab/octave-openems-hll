@@ -1,0 +1,31 @@
+name: Release
+
+on:
+  workflow_dispatch:
+  release:
+    types: published
+
+jobs:
+  run:
+    runs-on: ubuntu-20.04
+
+    steps:
+    - name: Dependencies
+      run: |
+        mkdir -p /usr/share/man/man1
+        sudo apt update
+        sudo apt install -y octave octave-htmldoc
+
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Package
+      run: make dist
+
+    - name: Package doc
+      run: make html
+
+    - name: Test
+      run: |
+        make install
+        make check
