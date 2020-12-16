@@ -13,8 +13,7 @@ Focus is on user interface and post-processing functions.
 - Touchstone file
 - S parameters (Smith chart and orthogonal)
 
-<img src="res/lpf-s.png" width="45%" title="lpf-s"/>
-<img src="res/lpf-smith.png" width="45%" title="lpf-smith"/>
+<img src="res/lpf-s.png" width="45%" title="lpf-s"/> <img src="res/lpf-smith.png" width="45%" title="lpf-smith"/>
 
 - Feed point impedance
 
@@ -26,22 +25,17 @@ Focus is on user interface and post-processing functions.
 
 - Phase response (wrapped and unwrapped)
 
-<img src="res/lpf-phase-response-wrapped.png" width="45%" title="lpf-phase-response-wrapped"/>
-<img src="res/lpf-phase-response-unwrapped.png" width="45%" title="lpf-phase-response-unwrapped"/>
+<img src="res/lpf-phase-response-wrapped.png" width="45%" title="lpf-phase-response-wrapped"/> <img src="res/lpf-phase-response-unwrapped.png" width="45%" title="lpf-phase-response-unwrapped"/>
 
 - Phase delay and group delay
 
-<img src="res/lpf-phase-delay.png" width="45%" title="lpf-phase-delay"/>
-<img src="res/lpf-group-delay.png" width="45%" title="lpf-group-delay"/>
+<img src="res/lpf-phase-delay.png" width="45%" title="lpf-phase-delay"/> <img src="res/lpf-group-delay.png" width="45%" title="lpf-group-delay"/>
 
 - Azimuth & elevation far field radiation pattern (polar and orthogonal, normalized and in dBi)
 
-<img src="res/lpf-ff-azim-rect-dbi@2510000000.png" width="45%" title="lpf-ff-azim-rect-dbi@2510000000"/>
-<img src="res/lpf-ff-elev-rect-dbi@2510000000.png" width="45%" title="lpf-ff-elev-rect-dbi@2510000000"/>
-<img src="res/lpf-ff-azim-polar-dbi@2510000000.png" width="45%" title="lpf-ff-azim-polar-dbi@2510000000"/>
-<img src="res/lpf-ff-elev-polar-dbi@2510000000.png" width="45%" title="lpf-ff-elev-polar-dbi@2510000000"/>
-<img src="res/lpf-ff-azim-polar-dbn@2510000000.png" width="45%" title="lpf-ff-azim-polar-dbi@2510000000"/>
-<img src="res/lpf-ff-elev-polar-dbn@2510000000.png" width="45%" title="lpf-ff-elev-polar-dbi@2510000000"/>
+<img src="res/lpf-ff-azim-rect-dbi@2510000000.png" width="45%" title="lpf-ff-azim-rect-dbi@2510000000"/> <img src="res/lpf-ff-elev-rect-dbi@2510000000.png" width="45%" title="lpf-ff-elev-rect-dbi@2510000000"/>
+<img src="res/lpf-ff-azim-polar-dbi@2510000000.png" width="45%" title="lpf-ff-azim-polar-dbi@2510000000"/> <img src="res/lpf-ff-elev-polar-dbi@2510000000.png" width="45%" title="lpf-ff-elev-polar-dbi@2510000000"/>
+<img src="res/lpf-ff-azim-polar-dbn@2510000000.png" width="45%" title="lpf-ff-azim-polar-dbi@2510000000"/> <img src="res/lpf-ff-elev-polar-dbn@2510000000.png" width="45%" title="lpf-ff-elev-polar-dbi@2510000000"/>
 
 - 3D far field radiation pattern for multiple frequencies (animated `.gif`)
 
