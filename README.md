@@ -1,8 +1,13 @@
+[![Liberapay patrons](https://img.shields.io/liberapay/patrons/thomaslepoix.svg?logo=liberapay)](https://liberapay.com/thomaslepoix/donate)
+[![Discord](https://img.shields.io/discord/616889479298547722?logo=discord)](https://discord.gg/P82fEmE)
+[![License](https://img.shields.io/github/license/thomaslepoix/Qucs-RFlayout)](LICENSE)
+<!-- [![Version](https://img.shields.io/github/v/release/Open-RFlab/octave-openems-hll)](https://github.com/Open-RFlab/octave-openems-hll/releases/latest) -->
+
 # OpenEMS High-level layer
 
 ## Description
 
-This is a set of Octave functions to ease the use of the openEMS FDTD simulator.
+This is a set of Octave functions to ease the use of the [openEMS](https://openems.de) FDTD simulator.
 
 Focus is on user interface and post-processing functions.
 
