@@ -14,18 +14,16 @@ jobs:
       run: |
         mkdir -p /usr/share/man/man1
         sudo apt update
-        sudo apt install -y octave octave-htmldoc
+        sudo apt install -y octave debhelper dh-octave devscripts equivs fakeroot
+        sudo octave --eval 'pkg install -global -forge generate_html'
 
     - name: Checkout
       uses: actions/checkout@v2
 
-    - name: Package
+    - name: Package Octave
       run: make dist
 
-    - name: Package doc
-      run: make html
-
-    - name: Test
+    - name: Package Debian
       run: |
-        make install
-        make check
+        sudo mk-build-deps --install --tool='apt-get --no-install-recommends --yes' debian/control
+        fakeroot debian/rules binary
