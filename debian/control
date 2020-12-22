@@ -10,7 +10,7 @@ Vcs-Browser: https://github.com/Open-RFlab/octave-openems-hll
 Testsuite: autopkgtest-pkg-octave
 
 Package: octave-openems-hll
-Architecture: any
+Architecture: all
 Depends: octave-openems,
          imagemagick
 Enhances: octave-openems
