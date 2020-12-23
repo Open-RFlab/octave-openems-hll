@@ -11,8 +11,8 @@ Testsuite: autopkgtest-pkg-octave
 
 Package: octave-openems-hll
 Architecture: all
-Depends: octave-openems,
-         imagemagick
+Depends: imagemagick
+Recommends: octave-openems
 Enhances: octave-openems
 Suggests: paraview
 Description: openEMS High-level layer
