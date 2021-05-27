@@ -41,16 +41,16 @@ jobs:
     - name: Download origin tarball
       run: |
         wget \
-          https://github.com/${{ env.GITHUB_REPOSITORY }}/archive/refs/tags/${{ steps.extract.outputs.version }}.tar.gz \
+          ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/archive/refs/tags/${{ steps.extract.outputs.version }}.tar.gz \
           -O ${{ env.PACKAGE }}_${{ steps.extract.outputs.version }}.orig.tar.gz
 
     - name: Untar & debianize
       run: |
         tar -xzvf ${{ env.PACKAGE }}_${{ steps.extract.outputs.version }}.orig.tar.gz
-        mv debian ${{ env.PACKAGE }}_${{ steps.extract.outputs.version }}
+        mv debian ${{ env.PACKAGE }}-${{ steps.extract.outputs.version }}
 
     - name: Package
-      run: dpkg-source -b ${{ env.PACKAGE }}_${{ steps.extract.outputs.version }}
+      run: dpkg-source -b ${{ env.PACKAGE }}-${{ steps.extract.outputs.version }}
 
 #    - name: Deploy source package on OBS
 #      run: |
