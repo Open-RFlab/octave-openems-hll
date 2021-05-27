@@ -1,0 +1,44 @@
+name: Release Octave
+
+on:
+  workflow_dispatch:
+  release:
+    types: published
+
+env:
+  PACKAGE: openems-hll
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Dependencies
+      run: |
+        mkdir -p /usr/share/man/man1
+        sudo apt update
+        sudo apt install -y octave
+        sudo octave --eval 'pkg install -global -forge generate_html'
+
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Package
+      run: make dist
+
+    - name: Extract informations
+      id: extract
+      shell: bash
+      run: |
+        echo "##[set-output name=tag;]$(echo ${GITHUB_REF##*/})"
+        echo "##[set-output name=upload_url;]$(curl -sL https://api.github.com/repos/Open-RFlab/octave-${{ env.PACKAGE }}/releases/tags/${GITHUB_REF##*/} | jq -r '.upload_url')"
+
+    - name: Deploy Octave package on Github
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.extract.outputs.upload_url }}
+        asset_path: target/${{ env.PACKAGE }}-${{ steps.extract.outputs.tag }}.tar.gz
+        asset_name: ${{ env.PACKAGE }}-${{ steps.extract.outputs.tag }}.tar.gz
+        asset_content_type: application/x-gz-compressed-tar

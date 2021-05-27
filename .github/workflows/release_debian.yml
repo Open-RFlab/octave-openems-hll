@@ -1,0 +1,74 @@
+name: Release Debian
+
+on:
+  workflow_dispatch:
+
+env:
+  PACKAGE: octave-openems-hll
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Dependencies
+      run: |
+        sudo apt update
+        sudo apt install -y dpkg-dev
+
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        ref: debian
+
+    - name: Extract tag
+      id: extract
+      shell: bash
+      run: |
+        echo "##[set-output name=version;]$( \
+          head debian/changelog -n 1 \
+          | awk '{print $2}' \
+          | sed -e 's/(//g' -e 's/)//g' \
+          | awk -F - '{print $1}' \
+          )"
+        echo "##[set-output name=revision;]$( \
+          head debian/changelog -n 1 \
+          | awk '{print $2}' \
+          | sed -e 's/(//g' -e 's/)//g' \
+          | awk -F - '{print $2}' \
+          )"
+
+    - name: Download origin tarball
+      run: |
+        wget \
+          https://github.com/${{ env.GITHUB_REPOSITORY }}/archive/refs/tags/${{ steps.extract.outputs.version }}.tar.gz \
+          -O ${{ env.PACKAGE }}_${{ steps.extract.outputs.version }}.orig.tar.gz
+
+    - name: Untar & debianize
+      run: |
+        tar -xzvf ${{ env.PACKAGE }}_${{ steps.extract.outputs.version }}.orig.tar.gz
+        mv debian ${{ env.PACKAGE }}_${{ steps.extract.outputs.version }}
+
+    - name: Package
+      run: dpkg-source -b ${{ env.PACKAGE }}_${{ steps.extract.outputs.version }}
+
+#    - name: Deploy source package on OBS
+#      run: |
+#        curl \
+#          -T ../octave-${{ env.PACKAGE }}_${GITHUB_REF##*/}_all.deb \
+#          --user thomaslepoix:${{ secrets.BINTRAY_API_KEY }} \
+#          https://api.bintray.com/content/open-rflab/debian/octave-${{ env.PACKAGE }}/${GITHUB_REF##*/}/pool/o/octave-${{ env.PACKAGE }}/octave-octave-${{ env.PACKAGE }}_${GITHUB_REF##*/}_all.deb \
+#          -H 'X-Bintray-Debian-Distribution: ${{ env.DISTRO }}' \
+#          -H 'X-Bintray-Debian-Component: main' \
+#          -H 'X-Bintray-Debian-Architecture: all' \
+#          -H 'X-Bintray-Publish: 1' \
+#          -H 'X-Bintray-Override: 1'
+
+    - name: Upload source package as artifact
+      uses: actions/upload-artifact@v2-preview
+      with:
+        name: source-package
+        path: |
+          ${{ env.PACKAGE }}_${{ steps.extract.outputs.version }}-${{ steps.extract.outputs.revision }}.dsc
+          ${{ env.PACKAGE }}_${{ steps.extract.outputs.version }}-${{ steps.extract.outputs.revision }}.debian.tar.xz
+          ${{ env.PACKAGE }}_${{ steps.extract.outputs.version }}.orig.tar.gz
