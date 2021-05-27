@@ -65,7 +65,7 @@ jobs:
 #          -H 'X-Bintray-Override: 1'
 
     - name: Upload source package as artifact
-      uses: actions/upload-artifact@v2-preview
+      uses: actions/upload-artifact@v2
       with:
         name: source-package
         path: |
