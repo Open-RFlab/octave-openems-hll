@@ -5,6 +5,8 @@ on:
 
 env:
   PACKAGE: octave-openems-hll
+  OBS_USER: thomaslepoix
+  OBS_PROJECT: home:${OBS_USER}:open-rflab
 
 jobs:
   run:
@@ -52,17 +54,57 @@ jobs:
     - name: Package
       run: dpkg-source -b ${{ env.PACKAGE }}-${{ steps.extract.outputs.version }}
 
-#    - name: Deploy source package on OBS
-#      run: |
-#        curl \
-#          -T ../octave-${{ env.PACKAGE }}_${GITHUB_REF##*/}_all.deb \
-#          --user thomaslepoix:${{ secrets.BINTRAY_API_KEY }} \
-#          https://api.bintray.com/content/open-rflab/debian/octave-${{ env.PACKAGE }}/${GITHUB_REF##*/}/pool/o/octave-${{ env.PACKAGE }}/octave-octave-${{ env.PACKAGE }}_${GITHUB_REF##*/}_all.deb \
-#          -H 'X-Bintray-Debian-Distribution: ${{ env.DISTRO }}' \
-#          -H 'X-Bintray-Debian-Component: main' \
-#          -H 'X-Bintray-Debian-Architecture: all' \
-#          -H 'X-Bintray-Publish: 1' \
-#          -H 'X-Bintray-Override: 1'
+    - name: Remove old source package on OBS
+      run: |
+        INFOS="$( \
+          curl \
+            --user ${{ env.OBS_USER }}:${{ secrets.OBS_PASSWORD }} \
+            https://api.opensuse.org/source/${{ env.OBS_PROJECT }}/${{ env.PACKAGE }}/)"
+        OLD_DSC="$( \
+          echo "${INFOS}" \
+          | grep .dsc \
+          | awk '{print $2}' \
+          | sed -e 's/name="//g' -e 's/"$//g' \
+          )"
+        OLD_DEBIAN_TXZ="$( \
+          echo "${INFOS}" \
+          | grep .debian.tar.xz \
+          | awk '{print $2}' \
+          | sed -e 's/name="//g' -e 's/"$//g' \
+          )"
+        OLD_ORIG_TGZ="$( \
+          echo "${INFOS}" \
+          | grep .orig.tar.gz \
+          | awk '{print $2}' \
+          | sed -e 's/name="//g' -e 's/"$//g' \
+          )"
+        if [ "${OLD_DSC}" ]
+        then curl \
+          --user ${{ env.OBS_USER }}:${{ secrets.OBS_PASSWORD }} \
+          -X DELETE https://api.opensuse.org/source/${{ env.OBS_PROJECT }}/${{ env.PACKAGE }}/${OLD_DSC}
+        fi
+        if [ "${OLD_DEBIAN_TXZ}" ]
+        then curl \
+          --user ${{ env.OBS_USER }}:${{ secrets.OBS_PASSWORD }} \
+          -X DELETE https://api.opensuse.org/source/${{ env.OBS_PROJECT }}/${{ env.PACKAGE }}/${OLD_DEBIAN_TXZ}
+        fi
+        if [ "${OLD_ORIG_TGZ}" ]
+        then curl \
+          --user ${{ env.OBS_USER }}:${{ secrets.OBS_PASSWORD }} \
+          -X DELETE https://api.opensuse.org/source/${{ env.OBS_PROJECT }}/${{ env.PACKAGE }}/${OLD_ORIG_TGZ}
+        fi
+
+    - name: Deploy source package on OBS
+      run: |
+        FILES={
+        FILES+=${{ env.PACKAGE }}_${{ steps.extract.outputs.version }}-${{ steps.extract.outputs.revision }}.dsc,
+        FILES+=${{ env.PACKAGE }}_${{ steps.extract.outputs.version }}-${{ steps.extract.outputs.revision }}.debian.tar.xz,
+        FILES+=${{ env.PACKAGE }}_${{ steps.extract.outputs.version }}.orig.tar.gz
+        FILES+=}
+        curl \
+          --user ${{ env.OBS_USER }}:${{ secrets.OBS_PASSWORD }} \
+          https://api.opensuse.org/source/${{ env.OBS_PROJECT }}/${{ env.PACKAGE }}/ \
+          -T "${FILES}"
 
     - name: Upload source package as artifact
       uses: actions/upload-artifact@v2
