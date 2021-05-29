@@ -1,4 +1,4 @@
-[![Package Debian](https://img.shields.io/github/workflow/status/Open-RFlab/octave-openems-hll/Release%20Debian?label=package&logo=debian)](https://build.opensuse.org/package/show/home:thomaslepoix:open-rflab/octave-openems-hll)
+[![Package Debian](https://img.shields.io/github/workflow/status/Open-RFlab/octave-openems-hll/Release%20Debian?label=package&logo=debian)](https://software.opensuse.org/download.html?project=home:thomaslepoix:open-rflab&package=octave-openems-hll)
 
 # OpenEMS High-level layer
 
