@@ -3,6 +3,8 @@
 [![License](https://img.shields.io/github/license/Open-RFlab/octave-openems-hll)](LICENSE)
 [![Version](https://img.shields.io/github/v/release/Open-RFlab/octave-openems-hll)](https://github.com/Open-RFlab/octave-openems-hll/releases/latest)
 
+[![Package Debian](https://img.shields.io/github/workflow/status/Open-RFlab/octave-openems-hll/Release%20Debian?label=package&logo=debian)](https://build.opensuse.org/package/show/home:thomaslepoix:open-rflab/octave-openems-hll)
+[![Package Octave](https://img.shields.io/github/workflow/status/Open-RFlab/octave-openems-hll/Release%20Octave?label=package&logo=octave)](https://github.com/Open-RFlab/octave-openems-hll/releases/latest)
 # OpenEMS High-level layer
 
 ## Description
