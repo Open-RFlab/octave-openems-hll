@@ -3,8 +3,9 @@
 [![License](https://img.shields.io/github/license/Open-RFlab/octave-openems-hll)](LICENSE)
 [![Version](https://img.shields.io/github/v/release/Open-RFlab/octave-openems-hll)](https://github.com/Open-RFlab/octave-openems-hll/releases/latest)
 
-[![Package Debian](https://img.shields.io/github/workflow/status/Open-RFlab/octave-openems-hll/Release%20Debian?label=package&logo=debian)](https://build.opensuse.org/package/show/home:thomaslepoix:open-rflab/octave-openems-hll)
+[![Package Debian](https://img.shields.io/github/workflow/status/Open-RFlab/octave-openems-hll/Release%20Debian?label=package&logo=debian)](https://software.opensuse.org/download.html?project=home:thomaslepoix:open-rflab&package=octave-openems-hll)
 [![Package Octave](https://img.shields.io/github/workflow/status/Open-RFlab/octave-openems-hll/Release%20Octave?label=package&logo=octave)](https://github.com/Open-RFlab/octave-openems-hll/releases/latest)
+
 # OpenEMS High-level layer
 
 ## Description
@@ -181,15 +182,17 @@ Note that `oemshll_postProcess()` also uses post-processing functions that are a
 
 ### Package installation
 
-- For Debian based distributions, a repository is available :
+- For Debian based distributions, a [repository](https://software.opensuse.org/download.html?project=home:thomaslepoix:open-rflab&package=octave-openems-hll) is available :
 
 ```sh
-curl -s https://bintray.com/user/downloadSubjectPublicKey?username=bintray | sudo apt-key --keyring /etc/apt/trusted.gpg.d/open-rflab.gpg add -
-echo "deb https://dl.bintray.com/open-rflab/debian $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/open-rflab.list
+DEBIAN=Debian_10    # Use the underlying Debian version of your Debian-based distro
 
-sudo apt-get update
-sudo apt-get install octave-openems-hll                            # Use Debian 10 octave-openems package
-sudo apt-get install octave-openems-hll --no-install-recommends    # Use manually installed openEMS
+echo "deb http://download.opensuse.org/repositories/home:/thomaslepoix:/open-rflab/${DEBIAN}/ /" | sudo tee /etc/apt/sources.list.d/home:thomaslepoix:open-rflab.list
+curl -fsSL https://download.opensuse.org/repositories/home:thomaslepoix:open-rflab/${DEBIAN}/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/home_thomaslepoix_open-rflab.gpg > /dev/null
+
+sudo apt update
+sudo apt install octave-openems-hll                            # Use Debian 10 octave-openems package
+sudo apt install octave-openems-hll --no-install-recommends    # Use manually installed openEMS
 ```
 
 - For other systems, you can download Octave package [here](https://github.com/Open-RFlab/octave-openems-hll/releases) and install it this way :
@@ -200,20 +203,7 @@ sudo octave --eval 'pkg install -global openems-hll-*.tar.gz'
 
 ### Installation from sources
 
-- Debian way :
-
-```sh
-octave-openems-hll $
-
-    # Install building tools
-    sudo apt-get install octave debhelper dh-octave devscripts equivs fakeroot
-    # Install build-time dependencies
-    sudo mk-build-deps --install --tool='apt-get --no-install-recommends --yes' debian/control
-    # Generate package
-    fakeroot debian/rules binary
-    # Install package
-    sudo apt-get install [--no-install-recommends] ../octave-openems-hll_*.deb
-```
+- Debian way : Take a look [on the debian branch](https://github.com/Open-RFlab/octave-openems-hll/tree/debian).
 
 - Octave way :
 
