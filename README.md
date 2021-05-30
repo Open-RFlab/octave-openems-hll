@@ -15,14 +15,18 @@ git clone https://github.com/Open-RFlab/octave-openems-hll -b debian debian --de
 cd octave-openems-hll
 sed -i DESCRIPTION -e "s/Version: .*$/Version: $(git describe --tags)/g"
 
+[ $(git describe --tags) = $(git describe --tags --abbrev=0) ] \
+	&& CMD='echo HEAD' \
+	|| CMD='git stash create'
 git archive \
 	--format=tar.gz \
 	-o ../octave-openems-hll_$(git describe --tags).orig.tar.gz \
 	--prefix=octave-openems-hll-$(git describe --tags)/ \
-	$(git stash create)
+	$(${CMD})
 
 mv ../debian/debian .
-sed -i debian/changelog -e "1i \
+[ $(git describe --tags) != $(git describe --tags --abbrev=0) ] \
+&& sed -i debian/changelog -e "1i \
 octave-openems-hll ($(git describe --tags)-1) unstable; urgency=medium\n\n\
   * Package from upstream sources\n\n\
  -- Thomas Lepoix <thomas.lepoix@protonmail.ch>  $(date -R)\n\
