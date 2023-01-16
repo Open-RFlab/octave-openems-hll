@@ -3,8 +3,8 @@
 [![License](https://img.shields.io/github/license/Open-RFlab/octave-openems-hll)](LICENSE)
 [![Version](https://img.shields.io/github/v/release/Open-RFlab/octave-openems-hll)](https://github.com/Open-RFlab/octave-openems-hll/releases/latest)
 
-[![Package Debian](https://img.shields.io/github/workflow/status/Open-RFlab/octave-openems-hll/Release%20Debian?label=package&logo=debian)](https://software.opensuse.org/download.html?project=home:thomaslepoix:open-rflab&package=octave-openems-hll)
-[![Package Octave](https://img.shields.io/github/workflow/status/Open-RFlab/octave-openems-hll/Release%20Octave?label=package&logo=octave)](https://github.com/Open-RFlab/octave-openems-hll/releases/latest)
+[![Package Debian](https://img.shields.io/github/actions/workflow/status/Open-RFlab/octave-openems-hll/release_debian.yml?label=package&logo=debian)](https://software.opensuse.org/download.html?project=home:thomaslepoix:open-rflab&package=octave-openems-hll)
+[![Package Octave](https://img.shields.io/github/actions/workflow/status/Open-RFlab/octave-openems-hll/release_octave.yml?label=package&logo=octave)](https://github.com/Open-RFlab/octave-openems-hll/releases/latest)
 
 # OpenEMS High-level layer
 
@@ -216,7 +216,7 @@ octave-openems-hll $
 
 ## Usage
 
-- API of each function is described in the function files. 
+- API of each function is described in the function files.
 - `oemshll_postProcess()` is an usage example of every other post-processing function.
 - For a complete script example, and particularly usage of `oemshll_cli()` and `oemshll_postProcess()`, take a look to a script produced by [Qucs-RFlayout](https://github.com/thomaslepoix/Qucs-RFlayout).
 
