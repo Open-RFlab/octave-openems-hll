@@ -62,13 +62,13 @@ if grid_arg
 	% Inner curved lines
 	ReZ = [0.2; 0.5; 1; 2];
 	ImZ = 1i * [1, 2, 5, 2];
-	Z = ReZ .+ linspace(-ImZ, ImZ, 256);
+	Z = ReZ + linspace(-ImZ, ImZ, 256);
 	Gamma = (Z-1)./(Z+1);
 	plot(Gamma.', 'color', [0.9, 0.9, 0.9]);
 
 	ReZ = [0.5, 0.5, 1, 1, 2, 2, 5, 5, 10, 10];
 	ImZ = 1i * [-0.2; 0.2; -0.5; 0.5; -1; 1; -2; 2; -5; 5];
-	Z = linspace(0, ReZ, 256) .+ ImZ;
+	Z = linspace(0, ReZ, 256) + ImZ;
 	Gamma = (Z-1)./(Z+1);
 	plot(Gamma.', 'color', [0.9, 0.9, 0.9]);
 
@@ -77,13 +77,13 @@ if grid_arg
 	ReZ = [5, 10];
 	center = ReZ ./ (ReZ + 1);
 	radius = 1 ./ (ReZ + 1);
-	plot(radius .* cos(angle.') .+ center, radius .* sin(angle.'), 'color', [0.9, 0.9, 0.9]);
+	plot(radius .* cos(angle.') + center, radius .* sin(angle.'), 'color', [0.9, 0.9, 0.9]);
 
 	% Outer black circle
 	ReZ = [0];
 	center = ReZ ./ (ReZ + 1);
 	radius = 1 ./ (ReZ + 1);
-	plot(radius .* cos(angle.') .+ center, radius .* sin(angle.'), 'k');
+	plot(radius .* cos(angle.') + center, radius .* sin(angle.'), 'k');
 
 	% A trick to restore color order
 	plot(0, 'visible', 'off');

@@ -204,8 +204,8 @@ if !isempty(f_equal_s) && !isempty(f_equal_v)
 	for i = 1:rows(f_equal_s)
 		f_equal_s_str = [f_equal_s(i, 1), '{', f_equal_s(i, 2), ', ', f_equal_s(i, 3), '}'];
 		f_select = [f_select, freq(find( ...
-			abs(20*log10(abs(eval(f_equal_s_str))) .- f_equal_v(i)) ...
-			== min(abs(20*log10(abs(eval(f_equal_s_str))) .- f_equal_v(i))) ))];
+			abs(20*log10(abs(eval(f_equal_s_str))) - f_equal_v(i)) ...
+			== min(abs(20*log10(abs(eval(f_equal_s_str))) - f_equal_v(i))) ))];
 	endfor
 endif
 
